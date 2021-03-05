@@ -25,14 +25,17 @@ jobs:
         with:
           driver-opts: network=host
 
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.CR_PAT }}
+
       - name: Build and Push
         uses: docker/build-push-action@v2
         with:
           context: .
           push: true
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-          registry: docker.pkg.github.com
-          repository: ${{ github.repository }}/currency-reader
-          tag_with_sha: true
-          tag_with_ref: true
+          tags: |
+            ghcr.io/jfm/currency-reader:latest
