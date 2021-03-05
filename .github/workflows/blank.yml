@@ -39,3 +39,5 @@ jobs:
           push: true
           tags: |
             ghcr.io/jfm/currency-reader:latest
+          secrets: |
+            GIT_AUTH_TOKEN=${{ secrets.CR_PAT }}
