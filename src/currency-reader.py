@@ -4,7 +4,7 @@ import falcon
 class HelloWorldResource(object):
     def on_get(self, request, response):
         response.status = falcon.HTTP_200
-        response.body = '{"hello": "world"}'
+        response.body = '{"hello": "all"}'
 
 
 app = falcon.API()

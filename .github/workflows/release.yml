@@ -1,5 +1,5 @@
 ---
-name: CI
+name: Release Image
 
 on:
   push:
@@ -40,4 +40,3 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.CR_PAT }}
-
