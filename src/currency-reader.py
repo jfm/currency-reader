@@ -9,7 +9,7 @@ class HelloWorldResource(object):
     def __init__(self):
         self.producer = KafkaProducer(
                 value_serializer=lambda v: json.dumps(v).encode("utf-8"), 
-                bootstrap_servers=os.getenv['KAFKA_BOOTSTRAP_SERVERS', 'localhost:1324']
+                bootstrap_servers=os.getenv('KAFKA_BOOTSTRAP_SERVERS', 'localhost:1324')
                 )
 
     def on_get(self, request, response):
