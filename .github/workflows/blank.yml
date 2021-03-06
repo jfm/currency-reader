@@ -35,7 +35,7 @@ jobs:
       - name: Build and Push
         uses: mr-smithers-excellent/docker-build-push@v5
         with:
-          image: image-name
+          image: currency-reader:latest
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.CR_PAT }}
