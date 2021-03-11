@@ -17,6 +17,10 @@ class CoinScheduler():
         schedule.every(seconds).seconds.do(method)
 
     def start(self):
+        thread = threading.Thread(target=self.pending)
+        thread.start()
+
+    def pending(self):
         while True:
             schedule.run_pending()
             time.sleep(1)
