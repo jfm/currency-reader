@@ -1,24 +1,16 @@
-from kafka import KafkaProducer
-import os
+from resources.health import Health
+from schedulers.coin_schedule import CoinScheduler
+from coins.coin_eth import Ethereum
+from coins.coin_btc import Bitcoin
 import falcon
-import json
 
-
-class HelloWorldResource(object):
-
-    def __init__(self):
-        self.producer = KafkaProducer(
-                value_serializer=lambda v: json.dumps(v).encode("utf-8"), 
-                bootstrap_servers=os.getenv('KAFKA_BOOTSTRAP_SERVERS', 'localhost:1324')
-                )
-
-    def on_get(self, request, response):
-        self.producer.send('testQueue', {"data": "Hello World"})
-
-        response.status = falcon.HTTP_200
-        response.body = 'Message Sent'
-
+ethereum = Ethereum()
+bitcoin = Bitcoin()
+coin_scheduler = CoinScheduler()
+coin_scheduler.scheduled_thread(ethereum.fetch_price, 5)
+coin_scheduler.scheduled_thread(bitcoin.fetch_price, 13)
+coin_scheduler.start()
 
 app = falcon.API()
-hello = HelloWorldResource()
-app.add_route('/', hello)
+health_resource = Health()
+app.add_route('/health', health_resource)
