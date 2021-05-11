@@ -1,4 +1,4 @@
-from kafka.kafka import CoinProducer
+from stream.coin_producer import CoinProducer
 from prometheus_client import Gauge
 
 
