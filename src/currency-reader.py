@@ -11,7 +11,7 @@ coingecko = CoinGeckoAPI()
 prices = CoinPrices(coingecko, ['bitcoin','ethereum','cardano'], ['dkk', 'usd'])
 coin_scheduler = CoinScheduler()
 
-coin_scheduler.scheduled_thread(prices.fetch_prices, 60)
+coin_scheduler.scheduled_thread(prices.fetch_prices, 15)
 
 app = falcon.API()
 health_resource = Health()
